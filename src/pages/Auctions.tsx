@@ -1,0 +1,43 @@
+import { useEffect, useState } from 'react'
+import { api } from '../lib/api'
+import AuctionCard from '../components/AuctionCard'
+
+export default function Auctions() {
+  const [items, setItems] = useState<any[]>([])
+  const [loading, setLoading] = useState(true)
+
+  async function load() {
+    setLoading(true)
+    try {
+      const { data } = await api.get('/auctions')
+      setItems(Array.isArray(data) ? data : [])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    load()
+  }, [])
+
+  return (
+    <main className="mg-page">
+      <div className="mg-header">
+        <h1>Subastas</h1>
+        <a href="/dashboard">Dashboard</a>
+      </div>
+
+      {loading && <p>Cargando...</p>}
+
+      {!loading && items.length === 0 && (
+        <p>No hay subastas todavía.</p>
+      )}
+
+      <div className="mg-grid">
+        {items.map((auction) => (
+          <AuctionCard key={auction._id} auction={auction} />
+        ))}
+      </div>
+    </main>
+  )
+}
