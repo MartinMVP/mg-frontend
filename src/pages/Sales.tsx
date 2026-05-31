@@ -26,6 +26,8 @@ function animalLabel(item: AccountSale) {
 export default function Sales() {
   const [items, setItems] = useState<AccountSale[]>([])
   const [loading, setLoading] = useState(true)
+  const [message, setMessage] = useState('')
+  const [workingId, setWorkingId] = useState('')
 
   async function load() {
     setLoading(true)
@@ -40,6 +42,25 @@ export default function Sales() {
   useEffect(() => {
     load()
   }, [])
+
+  async function updateSaleStatus(id: string, action: 'confirm' | 'cancel') {
+    setWorkingId(id)
+    setMessage('')
+
+    try {
+      const { data } = await api.post(`/sales/${id}/${action}`)
+      setItems((prev) =>
+        prev.map((item) =>
+          item._id === id ? { ...item, status: data?.status || item.status } : item,
+        ),
+      )
+      setMessage(action === 'confirm' ? 'Venta confirmada.' : 'Venta cancelada.')
+    } catch (err: any) {
+      setMessage(err?.response?.data?.error || 'No se pudo actualizar la venta.')
+    } finally {
+      setWorkingId('')
+    }
+  }
 
   return (
     <main className="mg-page">
@@ -61,15 +82,41 @@ export default function Sales() {
         <p>No tienes ventas registradas.</p>
       )}
 
+      {message && <p>{message}</p>}
+
       <div className="mg-grid">
-        {items.map((item) => (
-          <article className="mg-card" key={item._id}>
-            <h3>{animalLabel(item)}</h3>
-            <p>Comprador: <b>{item.buyerId?.name || 'Comprador'}</b></p>
-            <p>Precio final: <b>${Number(item.finalPrice || 0).toLocaleString('es-MX')} MXN</b></p>
-            <p>Status: <b>{item.status}</b></p>
-          </article>
-        ))}
+        {items.map((item) => {
+          const canUpdate = item.status === 'pending_contact' || item.status === 'contacted'
+          const isWorking = workingId === item._id
+
+          return (
+            <article className="mg-card" key={item._id}>
+              <h3>{animalLabel(item)}</h3>
+              <p>Comprador: <b>{item.buyerId?.name || 'Comprador'}</b></p>
+              <p>Precio final: <b>${Number(item.finalPrice || 0).toLocaleString('es-MX')} MXN</b></p>
+              <p>Status: <b>{item.status}</b></p>
+
+              {canUpdate && (
+                <div className="mg-actions">
+                  <button
+                    type="button"
+                    disabled={Boolean(workingId)}
+                    onClick={() => updateSaleStatus(item._id, 'confirm')}
+                  >
+                    {isWorking ? 'Procesando...' : 'Confirmar venta'}
+                  </button>
+                  <button
+                    type="button"
+                    disabled={Boolean(workingId)}
+                    onClick={() => updateSaleStatus(item._id, 'cancel')}
+                  >
+                    {isWorking ? 'Procesando...' : 'Cancelar venta'}
+                  </button>
+                </div>
+              )}
+            </article>
+          )
+        })}
       </div>
     </main>
   )
