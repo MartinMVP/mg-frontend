@@ -40,6 +40,13 @@ button {
   margin-bottom: 24px;
 }
 
+.mg-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+}
+
 .mg-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -123,4 +130,100 @@ button {
   font-size: 13px;
   color: #374151;
   white-space: nowrap;
+}
+
+.mg-muted {
+  color: #6b7280;
+}
+
+.mg-notifications {
+  position: relative;
+}
+
+.mg-icon-button {
+  position: relative;
+  width: 42px;
+  height: 42px;
+  border: 1px solid #374151;
+  border-radius: 10px;
+  background: #111827;
+  color: #fff;
+  cursor: pointer;
+  font-weight: 800;
+}
+
+.mg-badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 6px;
+  border-radius: 999px;
+  background: #dc2626;
+  color: #fff;
+  font-size: 12px;
+  line-height: 20px;
+}
+
+.mg-notification-menu {
+  position: absolute;
+  top: 50px;
+  right: 0;
+  z-index: 20;
+  width: min(340px, calc(100vw - 32px));
+  max-height: 420px;
+  overflow: auto;
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #fff;
+  color: #111827;
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.24);
+}
+
+.mg-notification-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.mg-notification-head button {
+  border: 0;
+  border-radius: 8px;
+  padding: 7px 10px;
+  background: #1f2937;
+  color: #fff;
+  cursor: pointer;
+}
+
+.mg-notification-item {
+  display: block;
+  width: 100%;
+  margin: 0 0 8px;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background: #fff;
+  color: #111827;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mg-notification-item.is-unread {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.mg-notification-item span,
+.mg-notification-item small {
+  display: block;
+}
+
+.mg-notification-item small {
+  margin-top: 4px;
+  color: #4b5563;
+  line-height: 1.35;
 }

@@ -1,6 +1,7 @@
 // src/pages/Dashboard.tsx
 import { useEffect, useState } from 'react';
 import { api } from '../lib/api';
+import NotificationBell from '../components/NotificationBell';
 
 export default function Dashboard() {
   const [me, setMe] = useState<any>(null);
@@ -48,8 +49,16 @@ export default function Dashboard() {
       }}
     >
       <header style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1>Dashboard</h1>
-        <div style={{ display: 'flex', gap: 8 }}>
+        <div>
+          <h1>Dashboard</h1>
+          <nav className="mg-nav">
+            <a href="/auctions">Subastas</a>
+            <a href="/account/purchases">Compras</a>
+            <a href="/account/sales">Ventas</a>
+          </nav>
+        </div>
+        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
+          <NotificationBell />
           <button onClick={fetchMe}>Refrescar</button>
           <button onClick={handleLogout}>Salir</button>
         </div>

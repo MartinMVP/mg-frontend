@@ -5,6 +5,8 @@ import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
 import Auctions from './pages/Auctions'
 import AuctionRoom from './pages/AuctionRoom'
+import Purchases from './pages/Purchases'
+import Sales from './pages/Sales'
 import { AuctionSocketProvider } from './context/AuctionSocketProvider'
 import './index.css'
 
@@ -13,6 +15,8 @@ const router = createBrowserRouter([
   { path: '/dashboard', element: <Dashboard /> },
   { path: '/auctions', element: <Auctions /> },
   { path: '/auctions/:id', element: <AuctionRoom /> },
+  { path: '/account/purchases', element: <Purchases /> },
+  { path: '/account/sales', element: <Sales /> },
 ])
 
 ReactDOM.createRoot(document.getElementById('root')!).render(

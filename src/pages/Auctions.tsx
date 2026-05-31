@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { api } from '../lib/api'
 import AuctionCard from '../components/AuctionCard'
+import NotificationBell from '../components/NotificationBell'
 
 export default function Auctions() {
   const [items, setItems] = useState<any[]>([])
@@ -23,8 +24,15 @@ export default function Auctions() {
   return (
     <main className="mg-page">
       <div className="mg-header">
-        <h1>Subastas</h1>
-        <a href="/dashboard">Dashboard</a>
+        <div>
+          <h1>Subastas</h1>
+          <nav className="mg-nav">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/account/purchases">Compras</a>
+            <a href="/account/sales">Ventas</a>
+          </nav>
+        </div>
+        <NotificationBell />
       </div>
 
       {loading && <p>Cargando...</p>}

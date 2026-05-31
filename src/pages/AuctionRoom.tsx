@@ -4,6 +4,7 @@ import { api } from '../lib/api'
 import LiveTimer from '../components/LiveTimer'
 import BidPanel from '../components/BidPanel'
 import BidHistory from '../components/BidHistory'
+import NotificationBell from '../components/NotificationBell'
 import { useAuctionSocket } from '../context/AuctionSocketProvider'
 
 export default function AuctionRoom() {
@@ -100,8 +101,11 @@ export default function AuctionRoom() {
   return (
     <main className="mg-page">
       <div className="mg-header">
-        <a href="/auctions">← Volver</a>
-        <span>{isConnected ? '🟢 Tiempo real conectado' : '🟡 Usando HTTP fallback'}</span>
+        <div>
+          <a href="/auctions">← Volver</a>
+          <p>{isConnected ? '🟢 Tiempo real conectado' : '🟡 Usando HTTP fallback'}</p>
+        </div>
+        <NotificationBell />
       </div>
 
       <section className="mg-card">
