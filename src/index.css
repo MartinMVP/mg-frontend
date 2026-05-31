@@ -97,3 +97,30 @@ button {
   opacity: 0.5;
   cursor: not-allowed;
 }
+.mg-bid-list {
+  display: grid;
+  gap: 10px;
+}
+
+.mg-bid-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  background: #f9fafb;
+}
+
+.mg-bid-row p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #6b7280;
+}
+
+.mg-bid-row span {
+  font-size: 13px;
+  color: #374151;
+  white-space: nowrap;
+}
