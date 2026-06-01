@@ -7,6 +7,7 @@ export default function Dashboard() {
   const [me, setMe] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [msg, setMsg] = useState('');
+  const canViewOperations = me?.role === 'admin' || me?.role === 'super';
 
   async function fetchMe() {
     setLoading(true);
@@ -55,6 +56,7 @@ export default function Dashboard() {
             <a href="/auctions">Subastas</a>
             <a href="/account/purchases">Compras</a>
             <a href="/account/sales">Ventas</a>
+            {canViewOperations && <a href="/admin/operations">Operaciones</a>}
           </nav>
         </div>
         <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>

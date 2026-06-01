@@ -82,6 +82,23 @@ button {
   background: #fff;
 }
 
+.mg-field {
+  display: grid;
+  gap: 8px;
+  max-width: 280px;
+  color: #111827;
+  font-weight: 700;
+}
+
+.mg-field select {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  background: #fff;
+  color: #111827;
+}
+
 .mg-actions {
   display: flex;
   gap: 8px;
