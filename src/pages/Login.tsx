@@ -21,7 +21,7 @@ export default function Login() {
 
   return (
     <div style={{ maxWidth: 360, margin: '40px auto', fontFamily: 'sans-serif' }}>
-      <h1>Mercado Ganadero — Login</h1>
+      <h1>Enlace Ganadero — Login</h1>
       <form onSubmit={onSubmit} style={{ display: 'grid', gap: 8 }}>
         <input value={email} onChange={e => setEmail(e.target.value)} placeholder="email" />
         <input value={password} onChange={e => setPassword(e.target.value)} placeholder="password" type="password" />
